@@ -1,3 +1,4 @@
+import { bottomMessageUtil } from 'util/bottomMessageUtil';
 import { stringUtil } from 'util/stringUtil';
 import * as apiService from './apiService';
 import { Player, PlayerDto, ReplayResponse, Team, TeamDto } from './types';
@@ -47,6 +48,9 @@ function cleanTeam(teamDto: TeamDto) {
 
 function cleanPlayer(playerDto: PlayerDto) {
     const os = stringUtil.skillStringToNumber(playerDto.skill);
+    if (os === 1) {
+        bottomMessageUtil.error(`The skill of ${playerDto.name} is unknown because the Replay API does not provide enough information for players with OS less than 1. Results will not be accurate.`)
+    }
     const result: Player = {
         id: playerDto.id,
         name: playerDto.name,
