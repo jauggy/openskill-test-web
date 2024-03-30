@@ -11,7 +11,7 @@ export const MuChange = (props: Props) => {
 
     if (props.data.newRating) {
         const newOs = props.data.newRating.mu - props.data.newRating.sigma
-        const osChange = newOs - props.data.matchRating
+        const osChange = newOs - (props.data.skill - props.data.uncertainty)
         return (
 
             <NumberChange>{osChange}</NumberChange>

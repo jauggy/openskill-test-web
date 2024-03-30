@@ -11,7 +11,7 @@ export const SigmaChange = (props: Props) => {
 
     if (props.data.newRating) {
         const newSigma = props.data.newRating.sigma
-        const change = newSigma - props.data.skillUncertainty
+        const change = newSigma - props.data.uncertainty
         return (
 
             <NumberChange>{change}</NumberChange>

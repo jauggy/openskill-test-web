@@ -7,7 +7,7 @@ import { TeamView } from 'components/TeamView';
 import { RText } from 'components/Typography/RText';
 import { useFonts } from 'expo-font';
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Team } from 'services/types';
 import { SearchInput } from 'src/components/SearchInput';
 import { replayService } from 'src/services/replayService';
@@ -15,6 +15,7 @@ import { replayUtil } from 'src/util/replayUtil';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
 import { osUtil } from 'util/osUtil';
 import { PredictText } from './PredictText';
+import { TeamsAsJson } from './TeamsAsJson';
 
 
 
@@ -23,6 +24,7 @@ export const HomeScreen = () => {
     const [teams, setTeams] = useState<Team[]>(null)
     const [renderTime, setRenderTime] = useState(new Date())
     const [isLoading, setIsLoading] = useState(false);
+    const dimensions = useWindowDimensions();
     const stateRef = useRef({
         apiResponse: null
     })
@@ -62,6 +64,16 @@ export const HomeScreen = () => {
         setRenderTime(new Date());
     }
 
+    const onUpdateTeams = (json: string) => {
+        try {
+            const o = JSON.parse(json);
+            setTeams(o)
+        } catch (e) {
+            bottomMessageUtil.error("Invalid json")
+        }
+
+    }
+
     const renderContent = () => {
         if (isLoading) {
             return <RActivityIndicatorFlex label="Loading..." />
@@ -82,6 +94,8 @@ export const HomeScreen = () => {
                             <View style={{ width: 20 }} />
                             <RButton icon='magnify' label='Team 2 wins' onPress={onTeam2Wins} />
                         </View>
+                        <Spacer />
+                        <TeamsAsJson teams={teams} onUpdateTeams={onUpdateTeams} />
                     </React.Fragment>
                 )
             } else {
@@ -99,19 +113,23 @@ export const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.searchContainer}>
-                <RText>Enter BAR replay URL:</RText>
+            <ScrollView contentContainerStyle={[styles.scrollContainer, { width: dimensions.width }]}>
+                <View style={styles.searchContainer}>
+                    <RText>Enter BAR replay URL:</RText>
 
-                <Spacer small />
-                <SearchInput onSearch={onSearch} placeholder='https://www.beyondallreason.info/replays?gameId=2c71ca6504f9e3b5a02732d0fbdcb5bc' />
+                    <Spacer small />
+                    <SearchInput onSearch={onSearch} placeholder='https://www.beyondallreason.info/replays?gameId=2c71ca6504f9e3b5a02732d0fbdcb5bc' />
 
-                <Spacer />
+                    <Spacer />
 
-                {renderContent()}
+                    {renderContent()}
 
 
 
-            </View>
+                </View>
+
+            </ScrollView>
+
 
 
 
@@ -128,6 +146,11 @@ const styles = StyleSheet.create({
     },
     description: {
         alignItems: 'flex-start'
+    },
+    scrollContainer: {
+        width: '100%',
+        alignItems: 'center',
+
     },
     searchContainer: {
         marginTop: 20,

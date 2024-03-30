@@ -25,9 +25,9 @@ export const PlayerView = (props: Props) => {
                 <RText>{props.data.name}</RText>
             </LeftColumn>
 
-            <OSText>{props.data.matchRating}</OSText>
+            <OSText>{props.data.skill - props.data.uncertainty}</OSText>
             <OSText>{props.data.skill}</OSText>
-            <OSText>{props.data.skillUncertainty}</OSText>
+            <OSText>{props.data.uncertainty}</OSText>
             <OSChange {...props} />
             <MuChange {...props} />
             <SigmaChange {...props} />

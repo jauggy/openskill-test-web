@@ -40,7 +40,7 @@ function cleanTeam(teamDto: TeamDto) {
         players: teamDto.Players.map(x => cleanPlayer(x)),
         id: teamDto.allyTeamId
     }
-    result.players.sort((a, b) => b.matchRating - a.matchRating)
+    result.players.sort((a, b) => (b.skill - b.uncertainty) - (a.skill - a.uncertainty))
 
     return result;
 }
@@ -49,11 +49,9 @@ function cleanPlayer(playerDto: PlayerDto) {
     const os = stringUtil.skillStringToNumber(playerDto.skill);
     const result: Player = {
         id: playerDto.id,
-        userId: playerDto.userId,
         name: playerDto.name,
-        matchRating: os,
         rank: playerDto.rank,
-        skillUncertainty: playerDto.skillUncertainty,
+        uncertainty: playerDto.skillUncertainty,
         skill: os + playerDto.skillUncertainty
     }
     return result;

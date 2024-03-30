@@ -5,7 +5,7 @@ const { rate, predictWin } = require('openskill')
 function toMuSigma(player: Player) {
     const result: MuSigma = {
         mu: player.skill,
-        sigma: player.skillUncertainty
+        sigma: player.uncertainty
     }
     return result;
 }

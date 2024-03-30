@@ -12,7 +12,6 @@ export interface TeamDto {
 
 export interface PlayerDto {
     id: number,
-    userId: number,
     name: string,
     skill: string, //format is ["13.31"]
     rank: number,
@@ -26,11 +25,9 @@ export interface Team {
 
 export interface Player {
     id: number,
-    userId: number,
     name: string,
     skill: number,
     rank: number,
-    skillUncertainty: number,
-    matchRating: number,
+    uncertainty: number,
     newRating?: MuSigma
 }
