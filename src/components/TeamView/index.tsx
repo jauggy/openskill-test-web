@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { Team } from "services/types";
 import { fontSizes } from "src/constants/fontSizes";
-import { SortedTeam } from "src/services/types";
 import { RText } from "../Typography/RText";
 import { PlayerView } from "./PlayerView";
 
 interface Props {
-    data: SortedTeam,
+    data: Team,
     index: number
 }
 

@@ -7,6 +7,7 @@ import { RText } from 'components/Typography/RText';
 import { useFonts } from 'expo-font';
 import React, { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Team } from 'services/types';
 import { SearchInput } from 'src/components/SearchInput';
 import { replayService } from 'src/services/replayService';
 import { replayUtil } from 'src/util/replayUtil';
@@ -16,7 +17,7 @@ import { bottomMessageUtil } from 'util/bottomMessageUtil';
 
 
 export default function App() {
-    const [teams, setTeams] = useState(null)
+    const [teams, setTeams] = useState<Team[]>(null)
     const [isLoading, setIsLoading] = useState(false);
     const stateRef = useRef({
         apiResponse: null
@@ -32,8 +33,8 @@ export default function App() {
         }
         const result = await replayService.getReplay(replayId);
         stateRef.current.apiResponse = result;
-        console.log(result);
 
+        setTeams(result)
     }
 
     const onSearch = (search: string) => {

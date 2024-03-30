@@ -18,7 +18,7 @@ export interface PlayerDto {
 }
 
 export interface Team {
-    Players: Player[],
+    players: Player[],
     id: number
 }
 
@@ -28,5 +28,6 @@ export interface Player {
     name: string,
     skill: number,
     rank: number,
-    skillUncertainty: number
+    skillUncertainty: number,
+    matchRating: number
 }

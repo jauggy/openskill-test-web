@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
+import { Player } from "services/types";
 import { fontSizes } from "src/constants/fontSizes";
-import { SortedPlayer } from "src/services/types";
 
 const icon1 = require('../../../assets/1.svg')
 const icon2 = require('../../../assets/2.svg')
@@ -14,7 +14,7 @@ const icon8 = require('../../../assets/8.svg')
 
 
 interface Props {
-    data: SortedPlayer,
+    data: Player,
     index: number
 }
 

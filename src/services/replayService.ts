@@ -37,7 +37,7 @@ function cleanTeams(response: ReplayResponse) {
 
 function cleanTeam(teamDto: TeamDto) {
     const result: Team = {
-        Players: teamDto.Players.map(x => cleanPlayer(x)),
+        players: teamDto.Players.map(x => cleanPlayer(x)),
         id: teamDto.allyTeamId
     }
 
@@ -45,13 +45,15 @@ function cleanTeam(teamDto: TeamDto) {
 }
 
 function cleanPlayer(playerDto: PlayerDto) {
+    const os = stringUtil.skillStringToNumber(playerDto.skill);
     const result: Player = {
         id: playerDto.id,
         userId: playerDto.userId,
         name: playerDto.name,
-        skill: stringUtil.skillStringToNumber(playerDto.skill),
+        matchRating: os,
         rank: playerDto.rank,
-        skillUncertainty: playerDto.skillUncertainty
+        skillUncertainty: playerDto.skillUncertainty,
+        skill: os + playerDto.skillUncertainty
     }
     return result;
 }
