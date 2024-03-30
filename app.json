@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "balance-algo-test",
+    "slug": "balance-algo-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
