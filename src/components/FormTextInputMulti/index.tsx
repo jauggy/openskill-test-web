@@ -1,5 +1,6 @@
 import { Spacer } from "components/Spacer";
 import { colors } from "constants/colors";
+import { fontFamilies } from "constants/fontFamilies";
 import { fontSizes } from "constants/fontSizes";
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
@@ -25,6 +26,7 @@ export const FormTextInputMulti = (props: Props) => {
                     placeholder={props.placeholder}
                     placeholderTextColor={colors.placeholder}
                     multiline
+
                 />
 
             </View>
@@ -35,7 +37,7 @@ export const FormTextInputMulti = (props: Props) => {
 const styles = StyleSheet.create({
     textInput: {
         fontSize: fontSizes.normal,
-        fontFamily: 'RobotoCondensed-Regular',
+        fontFamily: fontFamilies.textInputMulti,
         color: colors.black,
         paddingLeft: 6,
         paddingVertical: 12,
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
         borderColor: colors.themeLightGrey,
         borderRadius: 5,
         backgroundColor: 'white',
-        minHeight: 350
+        minHeight: 300
     },
     container: {
     },

@@ -1,11 +1,9 @@
-import { RobotoCondensed_300Light } from '@expo-google-fonts/roboto-condensed';
 import { BottomMessage } from 'components/BottomMessage';
 import { RButton } from 'components/Buttons/RButton';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
 import { Spacer } from 'components/Spacer';
 import { TeamView } from 'components/TeamView';
 import { RText } from 'components/Typography/RText';
-import { useFonts } from 'expo-font';
 import React, { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Team } from 'services/types';
@@ -28,10 +26,7 @@ export const HomeScreen = () => {
     const stateRef = useRef({
         apiResponse: null
     })
-    let [fontsLoaded] = useFonts({
-        RobotoCondensed_300Light,
 
-    });
 
     const setup = async (replayId: string) => {
         if (!replayId) {
@@ -106,9 +101,6 @@ export const HomeScreen = () => {
         return null;
     }
 
-    if (!fontsLoaded) {
-        return null;
-    }
 
 
     return (
