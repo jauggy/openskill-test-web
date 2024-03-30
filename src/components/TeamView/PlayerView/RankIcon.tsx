@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
-import { Player } from "services/types";
 import { fontSizes } from "src/constants/fontSizes";
 
 const icon1 = require('../../../assets/1.svg')
@@ -14,7 +13,7 @@ const icon8 = require('../../../assets/8.svg')
 
 
 interface Props {
-    data: Player,
+    rank: number,
     index: number
 }
 
@@ -42,11 +41,20 @@ function getIcon(rank: number) {
 }
 
 export const RankIcon = (props: Props) => {
+    const [icon, setIcon] = useState(null)
+
+    useEffect(() => {
+        setIcon(getIcon(props.rank))
+    }, [props.rank])
+
+    if (!icon) {
+        return null;
+    }
 
 
     return (
         <View style={{ ...styles.container }}>
-            <Image source={getIcon(props.data.rank)} style={styles.image} resizeMode='contain' />
+            <Image source={icon} style={styles.image} resizeMode='contain' />
         </View>
     )
 

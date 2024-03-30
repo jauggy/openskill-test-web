@@ -40,6 +40,7 @@ function cleanTeam(teamDto: TeamDto) {
         players: teamDto.Players.map(x => cleanPlayer(x)),
         id: teamDto.allyTeamId
     }
+    result.players.sort((a, b) => b.matchRating - a.matchRating)
 
     return result;
 }

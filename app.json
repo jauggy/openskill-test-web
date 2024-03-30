@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "balance-algo-test",
-    "slug": "balance-algo-test",
+    "name": "OpenSkill Library tester",
+    "slug": "openskill-test",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

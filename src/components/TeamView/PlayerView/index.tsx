@@ -21,7 +21,7 @@ export const PlayerView = (props: Props) => {
     return (
         <View style={{ ...styles.container }}>
             <LeftColumn>
-                <RankIcon {...props} />
+                <RankIcon rank={props.data.rank} index={props.index} />
                 <RText>{props.data.name}</RText>
             </LeftColumn>
 
