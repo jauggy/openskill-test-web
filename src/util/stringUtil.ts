@@ -7,6 +7,14 @@ function toTitleCase(str) {
     );
 }
 
+function skillStringToNumber(skillString: string) {
+    const regex = /[\d.]+/gm
+    const found = regex.exec(skillString)
+
+    return (parseFloat(found[0]));
+}
+
 export const stringUtil = {
-    toTitleCase: toTitleCase
+    toTitleCase: toTitleCase,
+    skillStringToNumber: skillStringToNumber
 }

@@ -1,14 +1,14 @@
 export interface ReplayResponse {
     id: string,
-    AllyTeams: Team[]
+    AllyTeams: TeamDto[]
 }
 
-export interface Team {
-    Players: Player[],
+export interface TeamDto {
+    Players: PlayerDto[],
     allyTeamId: number
 }
 
-export interface Player {
+export interface PlayerDto {
     id: number,
     userId: number,
     name: string,
@@ -17,15 +17,16 @@ export interface Player {
     skillUncertainty: number
 }
 
-export interface SortedPlayer {
-    matchRating: number,
-    id: number,
-    name: string,
-    rank: number,
-    mu: number,
-    sigma: number
+export interface Team {
+    Players: Player[],
+    id: number
 }
 
-export interface SortedTeam {
-    players: SortedPlayer[]
+export interface Player {
+    id: number,
+    userId: number,
+    name: string,
+    skill: number,
+    rank: number,
+    skillUncertainty: number
 }

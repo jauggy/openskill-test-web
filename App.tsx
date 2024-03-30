@@ -1,5 +1,4 @@
 import { RobotoCondensed_300Light } from '@expo-google-fonts/roboto-condensed';
-import { AlgoSelect } from 'components/AlgoSelect';
 import { BottomMessage } from 'components/BottomMessage';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
 import { Spacer } from 'components/Spacer';
@@ -8,22 +7,16 @@ import { RText } from 'components/Typography/RText';
 import { useFonts } from 'expo-font';
 import React, { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { pickByLeader } from 'src/balanceAlgos/pickByLeader';
-import { splitOneChevs } from 'src/balanceAlgos/splitOneChevs';
-import { BalanceAlgo } from 'src/balanceAlgos/types';
 import { SearchInput } from 'src/components/SearchInput';
 import { replayService } from 'src/services/replayService';
-import { SortedTeam } from 'src/services/types';
 import { replayUtil } from 'src/util/replayUtil';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
 
-const ALGOS: BalanceAlgo[] = [splitOneChevs, pickByLeader]
 
 
 
 export default function App() {
-    const [teams, setTeams] = useState<SortedTeam[]>();
-    const [algo, setAlgo] = useState<BalanceAlgo>(splitOneChevs)
+    const [teams, setTeams] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
     const stateRef = useRef({
         apiResponse: null
@@ -39,9 +32,8 @@ export default function App() {
         }
         const result = await replayService.getReplay(replayId);
         stateRef.current.apiResponse = result;
-        const players = algo.getPlayers(result);
-        const teams = algo.createTeams(players);
-        setTeams(teams);
+        console.log(result);
+
     }
 
     const onSearch = (search: string) => {
@@ -55,14 +47,7 @@ export default function App() {
         setup(replayId)
     }
 
-    const onAlgoSelected = (algo: BalanceAlgo) => {
-        setAlgo(algo);
 
-        const players = algo.getPlayers(stateRef.current.apiResponse);
-        const teams = algo.createTeams(players);
-        setTeams(teams);
-
-    }
 
     const renderContent = () => {
         if (isLoading) {
@@ -95,16 +80,9 @@ export default function App() {
                 <SearchInput onSearch={onSearch} placeholder='https://www.beyondallreason.info/replays?gameId=2c71ca6504f9e3b5a02732d0fbdcb5bc' />
 
                 <Spacer />
-                <View style={styles.row}>
-                    <RText>Balance Algorithm: </RText>
-                    <AlgoSelect algo={algo} onAlgoSelected={onAlgoSelected} />
-                </View>
+
                 {renderContent()}
-                <View style={styles.description}>
-                    <RText>Balance Algorithm Description</RText>
-                    <Spacer small />
-                    <RText>{algo.getDescription()}</RText>
-                </View>
+
             </View>
 
 
