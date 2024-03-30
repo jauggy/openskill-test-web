@@ -3,6 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { Team } from "services/types";
 import { fontSizes } from "src/constants/fontSizes";
 import { RText } from "../Typography/RText";
+import { LeftColumn } from "./LeftColumn";
+import { OSText } from "./OSText";
 import { PlayerView } from "./PlayerView";
 
 interface Props {
@@ -15,7 +17,16 @@ export const TeamView = (props: Props) => {
 
     return (
         <View style={{ ...styles.container }}>
-            <RText>Team {props.index + 1}</RText>
+            <View style={styles.row}>
+                <LeftColumn>
+                    <RText>Team {props.index + 1}</RText>
+                </LeftColumn>
+                <OSText>OS</OSText>
+                <OSText>μ</OSText>
+                <OSText>σ</OSText>
+
+            </View>
+
             {props.data.players.map((x, index) => {
                 return <PlayerView key={x.id} index={index} data={x} />
             })}
@@ -31,5 +42,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: fontSizes.normal,
 
+    },
+    row: {
+        flexDirection: 'row'
     }
 })

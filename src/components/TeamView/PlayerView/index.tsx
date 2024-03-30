@@ -1,12 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { Player } from "services/types";
 import { RText } from "src/components/Typography/RText";
 import { fontSizes } from "src/constants/fontSizes";
-import { SortedPlayer } from "src/services/types";
+import { LeftColumn } from "../LeftColumn";
+import { OSText } from "../OSText";
 import { RankIcon } from "./RankIcon";
 
 interface Props {
-    data: SortedPlayer,
+    data: Player,
     index: number
 }
 
@@ -15,22 +17,27 @@ export const PlayerView = (props: Props) => {
 
     return (
         <View style={{ ...styles.container }}>
-            <RankIcon {...props} />
-            <RText containerStyle={styles.nameColumn}>{props.data.name}</RText>
-            <RText>{props.data.matchRating}</RText>
+            <LeftColumn>
+                <RankIcon {...props} />
+                <RText>{props.data.name}</RText>
+            </LeftColumn>
+
+            <OSText>{props.data.matchRating}</OSText>
+            <OSText>{props.data.skill}</OSText>
+            <OSText>{props.data.skillUncertainty}</OSText>
+
         </View>
     )
 
 }
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: 4
     },
     text: {
         fontSize: fontSizes.normal,
 
     },
-    nameColumn: {
-        width: 200
-    }
+
 })
