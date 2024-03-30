@@ -1,5 +1,6 @@
 import { RobotoCondensed_300Light } from '@expo-google-fonts/roboto-condensed';
 import { BottomMessage } from 'components/BottomMessage';
+import { RButton } from 'components/Buttons/RButton';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
 import { Spacer } from 'components/Spacer';
 import { TeamView } from 'components/TeamView';
@@ -12,12 +13,14 @@ import { SearchInput } from 'src/components/SearchInput';
 import { replayService } from 'src/services/replayService';
 import { replayUtil } from 'src/util/replayUtil';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
+import { osUtil } from 'util/osUtil';
 
 
 
 
 export default function App() {
     const [teams, setTeams] = useState<Team[]>(null)
+    const [renderTime, setRenderTime] = useState(new Date())
     const [isLoading, setIsLoading] = useState(false);
     const stateRef = useRef({
         apiResponse: null
@@ -48,7 +51,15 @@ export default function App() {
         setup(replayId)
     }
 
+    const onTeam1Wins = () => {
+        osUtil.addNewRatings(teams[0], teams[1])
+        setRenderTime(new Date());
+    }
 
+    const onTeam2Wins = () => {
+        osUtil.addNewRatings(teams[1], teams[0])
+        setRenderTime(new Date());
+    }
 
     const renderContent = () => {
         if (isLoading) {
@@ -56,13 +67,24 @@ export default function App() {
 
         }
         if (teams) {
-            return (
-                <React.Fragment>
-                    {teams.map((x, index) => {
-                        return <TeamView data={x} index={index} key={index} />
-                    })}
-                </React.Fragment>
-            )
+            if (teams.length === 2) {
+                return (
+                    <React.Fragment>
+                        {teams.map((x, index) => {
+                            const key = `${index}:${renderTime.toString()}`
+                            return <TeamView data={x} index={index} key={key} />
+                        })}
+                        <View style={styles.row}>
+                            <RButton icon='magnify' label='Team 1 wins' onPress={onTeam1Wins} />
+                            <View style={{ width: 20 }} />
+                            <RButton icon='magnify' label='Team 2 wins' onPress={onTeam2Wins} />
+                        </View>
+                    </React.Fragment>
+                )
+            } else {
+                return <RText>Only matches with 2 teams are supported for now.</RText>
+            }
+
         }
         return null;
     }
@@ -83,6 +105,8 @@ export default function App() {
                 <Spacer />
 
                 {renderContent()}
+
+
 
             </View>
 

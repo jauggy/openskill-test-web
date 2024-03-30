@@ -5,6 +5,8 @@ import { RText } from "src/components/Typography/RText";
 import { fontSizes } from "src/constants/fontSizes";
 import { LeftColumn } from "../LeftColumn";
 import { OSText } from "../OSText";
+import { MuChange } from "./MuChange";
+import { OSChange } from "./OSChange";
 import { RankIcon } from "./RankIcon";
 
 interface Props {
@@ -25,6 +27,8 @@ export const PlayerView = (props: Props) => {
             <OSText>{props.data.matchRating}</OSText>
             <OSText>{props.data.skill}</OSText>
             <OSText>{props.data.skillUncertainty}</OSText>
+            <OSChange {...props} />
+            <MuChange {...props} />
 
         </View>
     )

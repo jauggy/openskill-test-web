@@ -1,3 +1,5 @@
+import { MuSigma } from "util/osUtil/types"
+
 export interface ReplayResponse {
     id: string,
     AllyTeams: TeamDto[]
@@ -29,5 +31,6 @@ export interface Player {
     skill: number,
     rank: number,
     skillUncertainty: number,
-    matchRating: number
+    matchRating: number,
+    newRating?: MuSigma
 }

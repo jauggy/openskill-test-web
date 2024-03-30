@@ -24,11 +24,14 @@ export const TeamView = (props: Props) => {
                 <OSText>OS</OSText>
                 <OSText>μ</OSText>
                 <OSText>σ</OSText>
-
+                <OSText weak>OS</OSText>
+                <OSText weak>μ</OSText>
+                <OSText weak>σ</OSText>
             </View>
 
             {props.data.players.map((x, index) => {
-                return <PlayerView key={x.id} index={index} data={x} />
+                const key = x.newRating ? `${x.id}:${x.newRating.mu}` : `${x.id}`
+                return <PlayerView key={key} index={index} data={x} />
             })}
         </View>
     )
@@ -37,7 +40,6 @@ export const TeamView = (props: Props) => {
 const styles = StyleSheet.create({
     container: {
         marginBottom: 50,
-        width: 400
     },
     text: {
         fontSize: fontSizes.normal,
