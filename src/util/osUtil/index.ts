@@ -1,6 +1,6 @@
 import { Player, Team } from "services/types";
-import { MuSigma } from "./types";
-const { rate } = require('openskill')
+import { MuSigma, Prediction } from "./types";
+const { rate, predictWin } = require('openskill')
 
 function toMuSigma(player: Player) {
     const result: MuSigma = {
@@ -36,6 +36,25 @@ function addNewRatings(winningTeam: Team, losingTeam: Team) {
 
 }
 
+function predict(team1: Team, team2: Team): Prediction {
+    const t1 = toOsTeam(team1);
+    const t2 = toOsTeam(team2);
+    const prediction = predictWin([t1, t2])
+    return {
+        team1Wins: prediction[0],
+        team2Wins: prediction[1]
+    }
+}
+
+function getPredictText(team1: Team, team2: Team) {
+    const prediction = predict(team1, team2)
+    const team1Wins = (prediction.team1Wins * 100).toFixed(1);
+    const team2Wins = (prediction.team2Wins * 100).toFixed(1);
+
+    return `OpenSkill Library win probabilities for Team 1 is ${team1Wins}% and for Team 2 is ${team2Wins}%`
+}
+
 export const osUtil = {
-    addNewRatings: addNewRatings
+    addNewRatings: addNewRatings,
+    getPredictText: getPredictText
 }
