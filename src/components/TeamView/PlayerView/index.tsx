@@ -8,6 +8,7 @@ import { OSText } from "../OSText";
 import { MuChange } from "./MuChange";
 import { OSChange } from "./OSChange";
 import { RankIcon } from "./RankIcon";
+import { SigmaChange } from "./SigmaChange";
 
 interface Props {
     data: Player,
@@ -29,6 +30,7 @@ export const PlayerView = (props: Props) => {
             <OSText>{props.data.skillUncertainty}</OSText>
             <OSChange {...props} />
             <MuChange {...props} />
+            <SigmaChange {...props} />
 
         </View>
     )
