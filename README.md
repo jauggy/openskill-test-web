@@ -29,4 +29,4 @@ Then to deploy (open console on root project folder)
 ```
 yarn deploy
 ```
-
+It will deploy to the project as defined inside .firebaserc
