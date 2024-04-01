@@ -1,3 +1,4 @@
+import { measurementConstants } from "constants/measurementConstants";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { RIconButtonFlex } from "./RIconButtonFlex";
@@ -58,5 +59,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 10,
         width: '100%',
+        height: measurementConstants.buttonHeight
     },
 })

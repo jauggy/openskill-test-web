@@ -1,4 +1,5 @@
 import { RText } from "components/Typography/RText";
+import { measurementConstants } from "constants/measurementConstants";
 import React, { useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from 'react-native-paper';
@@ -49,7 +50,9 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.primary,
         color: 'white',
-        minWidth: 0
+        minWidth: 0,
+        height: measurementConstants.buttonHeight,
+        justifyContent: 'center'
 
     },
     contentStyle: {

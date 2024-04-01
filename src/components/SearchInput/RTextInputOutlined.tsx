@@ -1,4 +1,5 @@
 
+import { measurementConstants } from "constants/measurementConstants";
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { IconButton } from "react-native-paper";
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
         borderColor: colors.themeLightGrey,
         borderRadius: 5,
         backgroundColor: 'white',
+        height: measurementConstants.buttonHeight
     },
     container: {
         flex: 1,

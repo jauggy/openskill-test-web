@@ -12,6 +12,7 @@ import { replayService } from 'src/services/replayService';
 import { replayUtil } from 'src/util/replayUtil';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
 import { osUtil } from 'util/osUtil';
+import { DummyButtons } from './DummyButtons';
 import { PredictText } from './PredictText';
 import { TeamsAsJson } from './TeamsAsJson';
 
@@ -106,11 +107,13 @@ export const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={[styles.scrollContainer, { width: dimensions.width }]}>
+                <View style={styles.paddingColumn} />
                 <View style={styles.searchContainer}>
                     <RText>Enter BAR replay URL:</RText>
+                    <SearchInput onSearch={onSearch} placeholder='https://www.beyondallreason.info/replays?gameId=2c71ca6504f9e3b5a02732d0fbdcb5bc' />
 
                     <Spacer small />
-                    <SearchInput onSearch={onSearch} placeholder='https://www.beyondallreason.info/replays?gameId=2c71ca6504f9e3b5a02732d0fbdcb5bc' />
+
 
                     <Spacer />
 
@@ -119,6 +122,11 @@ export const HomeScreen = () => {
 
 
                 </View>
+                <View style={styles.rightColumn}>
+
+                    <DummyButtons onUpdateTeams={onUpdateTeams} />
+                </View>
+                <View style={styles.paddingColumn} />
 
             </ScrollView>
 
@@ -141,13 +149,17 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         width: '100%',
-        alignItems: 'center',
-
+        flexDirection: 'row',
+        padding: 20
+    },
+    paddingColumn: {
+        flex: 1
     },
     searchContainer: {
-        marginTop: 20,
-        justifyContent: 'center',
-        width: 800
+        width: 800,
+    },
+    rightColumn: {
+        width: 250
     },
     row: {
         flexDirection: 'row'
