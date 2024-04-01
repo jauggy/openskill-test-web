@@ -30,7 +30,8 @@ export const TeamView = (props: Props) => {
             </View>
 
             {props.data.players.map((x, index) => {
-                const key = x.newRating ? `${x.id}:${x.newRating.mu}` : `${x.id}`
+                const id = `${index}:${x.name}`
+                const key = x.newRating ? `${id}:${x.newRating.mu}` : `${id}`
                 return <PlayerView key={key} index={index} data={x} />
             })}
         </View>

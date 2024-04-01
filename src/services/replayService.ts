@@ -52,7 +52,6 @@ function cleanPlayer(playerDto: PlayerDto) {
         bottomMessageUtil.error(`The skill of ${playerDto.name} is unknown because the Replay API does not provide enough information for players with OS less than 1. Results will not be accurate.`)
     }
     const result: Player = {
-        id: playerDto.id,
         name: playerDto.name,
         rank: playerDto.rank,
         uncertainty: playerDto.skillUncertainty,

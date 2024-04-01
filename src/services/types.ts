@@ -24,7 +24,6 @@ export interface Team {
 }
 
 export interface Player {
-    id: number,
     name: string,
     skill: number,
     rank: number,
