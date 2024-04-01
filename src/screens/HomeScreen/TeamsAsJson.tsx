@@ -4,8 +4,9 @@ import { FormTextInputMulti } from 'components/FormTextInputMulti';
 import { Spacer } from 'components/Spacer';
 import { RText } from 'components/Typography/RText';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Team } from 'services/types';
+import { homeScreenUtil } from './homeScreenUtil';
 
 
 interface Props {
@@ -23,6 +24,11 @@ export const TeamsAsJson = (props: Props) => {
         }
     }, [props.teams])
 
+    const createDummyTeams = (playersPerTeam: number) => {
+        const teams = homeScreenUtil.createCloneTeams(playersPerTeam)
+        props.onUpdateTeams(JSON.stringify(teams))
+    }
+
     if (!showDebug) {
         return <RLink onPress={() => setShowDebug(true)} label='Show Debug' />
     }
@@ -35,6 +41,15 @@ export const TeamsAsJson = (props: Props) => {
                 <RButton label='Update teams using json' icon={''} onPress={() => props.onUpdateTeams(text)}
                 />
                 <Spacer />
+                <View style={styles.row}>
+                    <RButton label='Create 2v2 dummy teams' icon={''}
+                        onPress={() => createDummyTeams(2)}
+                    />
+                    <RButton label='Create 8v8 dummy teams' icon={''}
+                        onPress={() => createDummyTeams(8)}
+                    />
+                </View>
+                <Spacer />
             </View>
         )
     }
@@ -42,3 +57,10 @@ export const TeamsAsJson = (props: Props) => {
     return null;
 
 }
+
+const styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    }
+})
