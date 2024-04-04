@@ -1,5 +1,6 @@
 import { BottomMessage } from 'components/BottomMessage';
 import { RButton } from 'components/Buttons/RButton';
+import { RLink } from 'components/Buttons/RLink';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
 import { Spacer } from 'components/Spacer';
 import { TeamView } from 'components/TeamView';
@@ -20,6 +21,7 @@ import { TeamsAsJson } from './TeamsAsJson';
 
 
 export const HomeScreen = () => {
+    const [assignChangesCount, setAssignChangesCount] = useState(0)
     const [teams, setTeams] = useState<Team[]>(null)
     const [renderTime, setRenderTime] = useState(new Date())
     const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +37,7 @@ export const HomeScreen = () => {
         }
         const result = await replayService.getReplay(replayId);
         stateRef.current.apiResponse = result;
-
+        setAssignChangesCount(0)
         setTeams(result)
     }
 
@@ -64,10 +66,17 @@ export const HomeScreen = () => {
         try {
             const o = JSON.parse(json);
             setTeams(o)
+            setAssignChangesCount(0)
         } catch (e) {
             bottomMessageUtil.error("Invalid json")
         }
 
+    }
+
+    const onAssignChanges = () => {
+        osUtil.assignNewRatings(teams)
+        setAssignChangesCount(prevCount => prevCount + 1)
+        setRenderTime(new Date())
     }
 
     const renderContent = () => {
@@ -79,17 +88,31 @@ export const HomeScreen = () => {
             if (teams.length === 2) {
                 return (
                     <React.Fragment>
-                        {teams.map((x, index) => {
-                            const key = `${index}:${renderTime.toString()}`
-                            return <TeamView data={x} index={index} key={key} />
-                        })}
+                        <View style={styles.teamContainer}>
+                            <View>
+                                {teams.map((x, index) => {
+                                    const key = `${index}:${renderTime.toString()}`
+                                    return <TeamView data={x} index={index} key={key} />
+                                })}
+                            </View>
+                            <View>
+                                <View>
+                                    <RButton icon='magnify' label='Team 1 wins' onPress={onTeam1Wins} />
+                                    <Spacer small />
+                                    <RButton icon='magnify' label='Team 2 wins' onPress={onTeam2Wins} />
+                                </View>
+                                <View style={styles.assignChangesLink}>
+                                    {teams[0].players[0].newRating &&
+                                        <RLink label='⇐ Assign Changes' onPress={onAssignChanges} />
+                                    }
+                                </View>
+                            </View>
+
+                        </View>
+
                         <PredictText teams={teams} />
                         <Spacer />
-                        <View style={styles.row}>
-                            <RButton icon='magnify' label='Team 1 wins' onPress={onTeam1Wins} />
-                            <View style={{ width: 20 }} />
-                            <RButton icon='magnify' label='Team 2 wins' onPress={onTeam2Wins} />
-                        </View>
+
                         <Spacer />
                         <TeamsAsJson teams={teams} onUpdateTeams={onUpdateTeams} />
                     </React.Fragment>
@@ -156,12 +179,22 @@ const styles = StyleSheet.create({
         flex: 1
     },
     searchContainer: {
-        width: 800,
+        width: 840,
     },
     rightColumn: {
         width: 250
     },
     row: {
         flexDirection: 'row'
+    },
+    teamContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    assignChangesLink: {
+        height: 50,
+        paddingTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

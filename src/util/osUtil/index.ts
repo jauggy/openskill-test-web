@@ -54,7 +54,26 @@ function getPredictText(team1: Team, team2: Team) {
     return `OpenSkill Library win probabilities for Team 1 is ${team1Wins}% and for Team 2 is ${team2Wins}%`
 }
 
+/**
+ * Updates the ratings of the new players with new ratings
+ */
+function assignNewRatings(teams: Team[]) {
+    teams.forEach(team => {
+        team.players.forEach(player => {
+            if (player.newRating?.mu) {
+                player.skill = player.newRating.mu
+                player.uncertainty = player.newRating.sigma
+                player.newRating = null
+            }
+
+        })
+    })
+
+    return teams
+}
+
 export const osUtil = {
     addNewRatings: addNewRatings,
-    getPredictText: getPredictText
+    getPredictText: getPredictText,
+    assignNewRatings: assignNewRatings
 }
