@@ -52,7 +52,6 @@ export const IconTextButton = (props: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 15,
         alignItems: 'flex-end',
     },
     content: {

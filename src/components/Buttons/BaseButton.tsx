@@ -40,10 +40,12 @@ export const BaseButton = (props: Props) => {
         return (
             <View
                 style={[buttonContainerStyle, { opacity: 0.5 }]}>
-                {props.loading}
-                <View style={styles.iconContainer}>
-                    {renderIcon()}
-                </View>
+                {props.icon &&
+                    <View style={styles.iconContainer}>
+                        {renderIcon()}
+                    </View>
+                }
+
 
                 <Text style={styles.text}>{props.label}</Text>
 
