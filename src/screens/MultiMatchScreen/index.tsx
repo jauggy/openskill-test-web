@@ -1,4 +1,3 @@
-import { BottomMessage } from 'components/BottomMessage';
 import { IconTextButton } from 'components/Buttons/IconTextButton';
 import { RLink } from 'components/Buttons/RLink';
 import { RTextInput } from 'components/RTextInput';
@@ -94,9 +93,7 @@ export const MultiMatchScreen = () => {
                 <View style={styles.gap} />
                 <RTextInput label='Match Rating (OS)' value={mr} setValue={setMr} />
                 <View style={styles.gap} />
-                <RTextInput label='Number of Matches' value={numMatches} setValue={setNumMatches} />
-                <View style={styles.gap} />
-                <RTextInput label='Team Size' value={teamSize} setValue={setTeamSize} />
+
             </View>
             <View style={styles.textContainer}>
                 <Spacer />
@@ -110,14 +107,22 @@ export const MultiMatchScreen = () => {
             </View>
 
             <View style={styles.rowContainer}>
-                <IconTextButton label='Win Streak' icon={'trending-up'}
-                    onPress={() => onSubmit(true)}
-                />
+                <RTextInput label='Number of Matches' value={numMatches} setValue={setNumMatches} />
                 <View style={styles.gap} />
-                <IconTextButton label='Loss Streak' icon={'trending-down'}
-                    onPress={() => onSubmit(false)}
-                />
+                <RTextInput label='Team Size' value={teamSize} setValue={setTeamSize} />
+                <View style={styles.gap} />
+
+                <View>
+                    <IconTextButton fullWidth label='Win Streak' icon={'trending-up'}
+                        onPress={() => onSubmit(true)}
+                    />
+                    <View style={{ height: 4 }} />
+                    <IconTextButton fullWidth label='Loss Streak' icon={'trending-down'}
+                        onPress={() => onSubmit(false)}
+                    />
+                </View>
             </View>
+
             <Spacer />
             <View style={styles.textContainer}>
                 <View style={styles.rowContainer}>
@@ -128,7 +133,7 @@ export const MultiMatchScreen = () => {
                 </View>
 
             </View>
-            <BottomMessage />
+
         </View>
     );
 }
@@ -136,13 +141,12 @@ export const MultiMatchScreen = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        alignItems: 'center',
         justifyContent: 'flex-start',
+        alignItems: 'center',
         flex: 1
     },
     rowContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center'
+        flexDirection: 'row', width: 800
     },
     gap: {
         width: 20
