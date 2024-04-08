@@ -1,4 +1,4 @@
-import { RButton } from 'components/Buttons/RButton';
+import { IconTextButton } from 'components/Buttons/IconTextButton';
 import { RLink } from 'components/Buttons/RLink';
 import { FormTextInputMulti } from 'components/FormTextInputMulti';
 import { Spacer } from 'components/Spacer';
@@ -34,8 +34,9 @@ export const TeamsAsJson = (props: Props) => {
             <View>
                 <RText>You can override players' skill/uncertainty by editing the json below. </RText>
                 <FormTextInputMulti onChangeText={setText} value={text} />
-                <RButton label='Update teams using json' icon={''} onPress={() => props.onUpdateTeams(text)}
+                <IconTextButton label='Update teams using json' icon={'check'} onPress={() => props.onUpdateTeams(text)}
                 />
+                <Spacer />
                 <Spacer />
 
             </View>

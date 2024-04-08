@@ -1,5 +1,5 @@
 import { BottomMessage } from 'components/BottomMessage';
-import { RButton } from 'components/Buttons/RButton';
+import { IconTextButton } from 'components/Buttons/IconTextButton';
 import { RLink } from 'components/Buttons/RLink';
 import { RTextInput } from 'components/RTextInput';
 import { Spacer } from 'components/Spacer';
@@ -110,10 +110,11 @@ export const MultiMatchScreen = () => {
             </View>
 
             <View style={styles.rowContainer}>
-                <RButton label='Win Streak' icon={'transfer-up'}
+                <IconTextButton label='Win Streak' icon={'trending-up'}
                     onPress={() => onSubmit(true)}
                 />
-                <RButton label='Loss Streak' icon={'transfer-down'}
+                <View style={styles.gap} />
+                <IconTextButton label='Loss Streak' icon={'trending-down'}
                     onPress={() => onSubmit(false)}
                 />
             </View>

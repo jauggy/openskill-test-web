@@ -5,6 +5,7 @@ const hitslop = {
 
 export const measurementConstants = {
     buttonHeight: 47.5,
+    buttonRadius: 6,
     formComponentMarginBottom: 30,
     formComponentMarginBottomSmall: 15,
     optionButtonWidth: 100,

@@ -1,5 +1,5 @@
 import { BottomMessage } from 'components/BottomMessage';
-import { RButton } from 'components/Buttons/RButton';
+import { TextButton } from 'components/Buttons/TextButton';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
 import { Spacer } from 'components/Spacer';
 import { TeamView } from 'components/TeamView';
@@ -86,9 +86,9 @@ export const HomeScreen = () => {
                         <PredictText teams={teams} />
                         <Spacer />
                         <View style={styles.row}>
-                            <RButton icon='magnify' label='Team 1 wins' onPress={onTeam1Wins} />
+                            <TextButton label='Team 1 wins' onPress={onTeam1Wins} />
                             <View style={{ width: 20 }} />
-                            <RButton icon='magnify' label='Team 2 wins' onPress={onTeam2Wins} />
+                            <TextButton label='Team 2 wins' onPress={onTeam2Wins} />
                         </View>
                         <Spacer />
                         <TeamsAsJson teams={teams} onUpdateTeams={onUpdateTeams} />
