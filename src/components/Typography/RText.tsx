@@ -9,10 +9,11 @@ interface Props {
     containerStyle?: any
     color?: string,
     systemFont?: boolean
+    bold?: boolean
 }
 
 export const RText = (props: Props) => {
-    const fontFamily = props.systemFont ? null : fontFamilies.default
+    const fontFamily = props.systemFont ? null : props.bold ? fontFamilies.strong : fontFamilies.default
     const fontSize = props.small ? fontSizes.small : fontSizes.normal
     const color = props.color ? props.color : 'black'
     const textStyle = [styles.text, { fontSize: fontSize, color: color, fontFamily: fontFamily }]

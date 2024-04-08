@@ -71,7 +71,7 @@ export const BottomMessage = () => {
 
     const transform = [{ translateY: translateY }]
 
-    const borderColor = level === 'error' ? colors.themeDarkRed : colors.themeDarkGreen
+    const borderColor = level === 'error' ? colors.error : colors.success
 
     return (
         <View style={styles.bottomContainer} pointerEvents="box-none">

@@ -5,6 +5,7 @@ import { colors } from 'constants/colors';
 import { useFonts } from 'expo-font';
 import React from 'react';
 import { HomeScreen } from 'screens/HomeScreen';
+import { MultiMatchScreen } from 'screens/MultiMatchScreen';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -31,7 +32,7 @@ export default function App() {
                     tabBarIndicatorStyle: { backgroundColor: 'white' },
                 }}>
                 <Tab.Screen name="Single Match" component={HomeScreen} />
-                <Tab.Screen name="Multi Match" component={HomeScreen} />
+                <Tab.Screen name="Multi Match" component={MultiMatchScreen} />
             </Tab.Navigator>
         </NavigationContainer>
     )
