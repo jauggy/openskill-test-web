@@ -1,7 +1,7 @@
+import { SearchButton } from "components/Buttons/SearchButton";
 import { measurementConstants } from "constants/measurementConstants";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { RIconButtonFlex } from "./RIconButtonFlex";
 import { RTextInputOutlined } from "./RTextInputOutlined";
 
 interface Props {
@@ -43,7 +43,7 @@ export const SearchInput = (props: Props) => {
                 onChangeText={setSearchField}
                 value={searchField} icon="close"
                 isIconVisible={isCrossVisible} />
-            <RIconButtonFlex icon="magnify" onPress={() => onPressMagnifyButton(searchField)} />
+            <SearchButton icon="magnify" onPress={() => onPressMagnifyButton(searchField)} />
         </View>
 
     )

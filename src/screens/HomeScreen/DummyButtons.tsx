@@ -1,4 +1,4 @@
-import { RButton } from 'components/Buttons/RButton';
+import { IconTextButton } from 'components/Buttons/IconTextButton';
 import { StyleSheet, View } from 'react-native';
 import { homeScreenUtil } from './homeScreenUtil';
 
@@ -21,13 +21,13 @@ export const DummyButtons = (props: Props) => {
 
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
-                <RButton label='Create 2v2 dummy teams' icon={''}
+                <IconTextButton label='Create 2v2 dummy teams' icon={'account-plus'}
                     onPress={() => createDummyTeams(2)}
                 />
             </View>
             <View style={styles.buttonContainer}>
 
-                <RButton label='Create 8v8 dummy teams' icon={''}
+                <IconTextButton label='Create 8v8 dummy teams' icon={'account-plus'}
                     onPress={() => createDummyTeams(8)}
                 />
             </View>
@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     buttonContainer: {
-        marginTop: 19,
+        marginTop: 4,
     }
 })
