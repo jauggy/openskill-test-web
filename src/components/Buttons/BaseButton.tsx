@@ -57,21 +57,19 @@ export const BaseButton = (props: Props) => {
 
 
     return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                hitSlop={{ top: 16, bottom: 4, left: 8, right: 32 }}
-                onPress={props.onPress}
-                activeOpacity={0.6}
-                style={buttonContainerStyle}>
-                {props.icon &&
-                    <View style={styles.iconContainer}>
-                        <MaterialCommunityIcons name={props.icon} color='white' size={20} />
-                    </View>
-                }
-                <Text style={styles.text}>{props.label}</Text>
+        <TouchableOpacity
+            hitSlop={{ top: 16, bottom: 4, left: 8, right: 32 }}
+            onPress={props.onPress}
+            activeOpacity={0.6}
+            style={buttonContainerStyle}>
+            {props.icon &&
+                <View style={styles.iconContainer}>
+                    <MaterialCommunityIcons name={props.icon} color='white' size={20} />
+                </View>
+            }
+            <Text style={styles.text}>{props.label}</Text>
 
-            </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
 
     )
 
