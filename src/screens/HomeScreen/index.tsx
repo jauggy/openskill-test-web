@@ -1,9 +1,11 @@
+import { BookmarkIcon } from 'components/BookmarkIcon';
 import { BottomMessage } from 'components/BottomMessage';
 import { TextButton } from 'components/Buttons/TextButton';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
 import { Spacer } from 'components/Spacer';
 import { TeamView } from 'components/TeamView';
 import { RText } from 'components/Typography/RText';
+import { pathConfig } from 'constants/pathConfig';
 import React, { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Team } from 'services/types';
@@ -134,6 +136,7 @@ export const HomeScreen = () => {
 
 
             <BottomMessage />
+            <BookmarkIcon path={pathConfig.SINGLE_MATCH} />
         </View>
     );
 }
