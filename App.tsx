@@ -2,6 +2,7 @@ import { RobotoCondensed_300Light, RobotoCondensed_400Regular } from '@expo-goog
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { colors } from 'constants/colors';
+import { pathConfig } from 'constants/pathConfig';
 import { useFonts } from 'expo-font';
 import React from 'react';
 import { HomeScreen } from 'screens/HomeScreen';
@@ -9,7 +10,13 @@ import { MultiMatchScreen } from 'screens/MultiMatchScreen';
 
 const Tab = createMaterialTopTabNavigator();
 
+function getInitialRouteName() {
+    const pathname = window.location.pathname
+    if (pathname === pathConfig.MULTI_MATCH) {
+        return 'Multi Match'
+    }
 
+}
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -18,13 +25,14 @@ export default function App() {
 
     });
 
+
     if (!fontsLoaded) {
         return null;
     }
 
     return (
         <NavigationContainer>
-            <Tab.Navigator sceneContainerStyle={styles.scene}
+            <Tab.Navigator sceneContainerStyle={styles.scene} initialRouteName={getInitialRouteName()}
                 screenOptions={{
                     tabBarLabelStyle: { fontSize: 12, color: 'white' },
                     tabBarItemStyle: { width: 200 },

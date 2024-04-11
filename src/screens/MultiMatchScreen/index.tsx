@@ -1,9 +1,11 @@
+import { BookmarkIcon } from 'components/BookmarkIcon';
 import { IconTextButton } from 'components/Buttons/IconTextButton';
 import { RLink } from 'components/Buttons/RLink';
 import { RTextInput } from 'components/RTextInput';
 import { Spacer } from 'components/Spacer';
 import { RText } from 'components/Typography/RText';
 import { RWeakText } from 'components/Typography/RWeakText';
+import { pathConfig } from 'constants/pathConfig';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
@@ -133,6 +135,9 @@ export const MultiMatchScreen = () => {
                 </View>
 
             </View>
+
+            <BookmarkIcon path={pathConfig.SINGLE_MATCH} />
+
 
         </View>
     );
