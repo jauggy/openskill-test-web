@@ -1,6 +1,7 @@
 import { RobotoCondensed_300Light, RobotoCondensed_400Regular } from '@expo-google-fonts/roboto-condensed';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { Footer } from 'components/Footer';
 import { colors } from 'constants/colors';
 import { pathConfig } from 'constants/pathConfig';
 import { useFonts } from 'expo-font';
@@ -42,6 +43,7 @@ export default function App() {
                 <Tab.Screen name="Single Match" component={HomeScreen} />
                 <Tab.Screen name="Multi Match" component={MultiMatchScreen} />
             </Tab.Navigator>
+            <Footer />
         </NavigationContainer>
     )
 }
