@@ -136,7 +136,7 @@ export const MultiMatchScreen = () => {
 
             </View>
 
-            <BookmarkIcon path={pathConfig.SINGLE_MATCH} />
+            <BookmarkIcon path={pathConfig.MULTI_MATCH} />
 
 
         </View>
