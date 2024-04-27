@@ -15,22 +15,22 @@ const url = `https://server4.beyondallreason.info/battle/ratings`
 
 interface CastResult {
     skill: number,
-    matchRating: number,
+    uncertainty: number,
     numMatches: number,
     teamSize: number
 }
 
-function castToNumbers(skillText: string, mrText: string, numMatchesText: string, teamSizeText: string): CastResult {
+function castToNumbers(skillText: string, sigmaText: string, numMatchesText: string, teamSizeText: string): CastResult {
     const skill = parseFloat(skillText)
-    const mr = parseFloat(mrText)
+    const sigma = parseFloat(sigmaText)
     const numMatches = parseFloat(numMatchesText)
     const teamSize = parseFloat(teamSizeText)
 
     if (isNaN(skill)) {
         throw 'Skill is invalid number'
     }
-    if (isNaN(mr)) {
-        throw 'Match Rating is invalid number'
+    if (isNaN(sigma)) {
+        throw 'Uncertainty is invalid number'
     }
     if (isNaN(numMatches) || numMatches <= 0) {
         throw 'Number of Matches is invalid number'
@@ -43,7 +43,7 @@ function castToNumbers(skillText: string, mrText: string, numMatchesText: string
 
     return {
         skill: skill,
-        matchRating: mr,
+        uncertainty: sigma,
         teamSize: teamSize,
         numMatches: numMatches
     }
@@ -51,7 +51,7 @@ function castToNumbers(skillText: string, mrText: string, numMatchesText: string
 
 export const MultiMatchScreen = () => {
     const [skill, setSkill] = React.useState("25");
-    const [mr, setMr] = React.useState("16.67");
+    const [uncertainty, setUncertainty] = React.useState("8.33");
     const [numMatches, setNumMatches] = React.useState("10");
     const [teamSize, setTeamSize] = React.useState("8");
     const [resultText, setResultText] = useState(null)
@@ -66,9 +66,8 @@ export const MultiMatchScreen = () => {
     const onSubmit = (isWinner?: boolean) => {
 
         try {
-            const castResult = castToNumbers(skill, mr, numMatches, teamSize)
-            const sigma = castResult.skill - castResult.matchRating
-            const result = osUtil.cloneAndRateMultiple(castResult.skill, sigma, castResult.teamSize, isWinner, castResult.numMatches)
+            const castResult = castToNumbers(skill, uncertainty, numMatches, teamSize)
+            const result = osUtil.cloneAndRateMultiple(castResult.skill, castResult.uncertainty, castResult.teamSize, isWinner, castResult.numMatches)
 
             const newOs = (result.mu - result.sigma).toFixed(2)
             const newMu = result.mu.toFixed(2)
@@ -93,15 +92,16 @@ export const MultiMatchScreen = () => {
             <View style={styles.rowContainer}>
                 <RTextInput label='Skill (μ)' value={skill} setValue={setSkill} />
                 <View style={styles.gap} />
-                <RTextInput label='Match Rating (OS)' value={mr} setValue={setMr} />
+                <RTextInput label='Uncertainty (σ)' value={uncertainty} setValue={setUncertainty} />
                 <View style={styles.gap} />
 
             </View>
             <View style={styles.textContainer}>
                 <Spacer />
 
-                <RText>Enter your latest skill and match rating values above. These values can be found via the website:</RText>
+                <RText>Enter your latest skill and uncertainties values above. These values can be found via the website:</RText>
                 <RLink label={url} onPress={onLinkAccount} />
+                <RText>Note that skill is not the same as OS/match rating.</RText>
                 <Spacer />
 
                 <RText>Pressing a button below will calculate your new rating if you were to win/lose matches where everyone is a clone of yourself. The probability of winning each match will be 50%, but your rating will change more if the team size is smaller.</RText>
