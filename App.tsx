@@ -39,6 +39,8 @@ export default function App() {
                     tabBarItemStyle: { width: 200 },
                     tabBarStyle: { backgroundColor: colors.topBar },
                     tabBarIndicatorStyle: { backgroundColor: 'white' },
+                    swipeEnabled: false
+
                 }}>
                 <Tab.Screen name="Single Match" component={HomeScreen} />
                 <Tab.Screen name="Multi Match" component={MultiMatchScreen} />
