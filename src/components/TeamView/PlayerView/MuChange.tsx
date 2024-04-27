@@ -10,8 +10,8 @@ interface Props {
 export const MuChange = (props: Props) => {
 
     if (props.data.newRating) {
-        const newOs = props.data.newRating.mu - props.data.newRating.sigma
-        const osChange = newOs - (props.data.skill - props.data.uncertainty)
+        const newMu = props.data.newRating.mu
+        const osChange = newMu - (props.data.skill)
         return (
 
             <NumberChange>{osChange}</NumberChange>
