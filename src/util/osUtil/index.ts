@@ -14,10 +14,10 @@ function toOsTeam(team: Team): MuSigma[] {
     return team.players.map(x => toMuSigma(x))
 }
 
-function addNewRatings(winningTeam: Team, losingTeam: Team, overrideOldRating?: boolean) {
+function addNewRatings(winningTeam: Team, losingTeam: Team, overrideOldRating?: boolean, tau?: number) {
     const winner = toOsTeam(winningTeam);
     const loser = toOsTeam(losingTeam)
-    const result = rate([winner, loser]);
+    const result = rate([winner, loser], { tau: tau });
     //This should be an array of size 2
     const winningResult: MuSigma[] = result[0];
     const losingResult: MuSigma[] = result[1];
@@ -78,7 +78,7 @@ function getPredictText(team1: Team, team2: Team) {
 /**
  * Clones a user into teams and re-rates them after win/loss
  */
-function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boolean) {
+function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boolean, tau: number) {
     if (teamSize <= 0) {
         throw 'Team size should be greater than 0'
     }
@@ -104,7 +104,7 @@ function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boo
         id: 1
     }
 
-    addNewRatings(team1, team2, true)
+    addNewRatings(team1, team2, true, tau)
 
     if (isWinner) {
         return team1.players[0]
@@ -115,11 +115,11 @@ function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boo
     }
 }
 
-function cloneAndRateMultiple(mu: number, sigma: number, teamSize: number, isWinner: boolean, numMatches: number): MuSigma {
+function cloneAndRateMultiple(mu: number, sigma: number, teamSize: number, isWinner: boolean, numMatches: number, tau: number): MuSigma {
     let currentMu = mu;
     let currentSigma = sigma
     for (let i = 0; i < numMatches; i++) {
-        const result = cloneAndRate(currentMu, currentSigma, teamSize, isWinner)
+        const result = cloneAndRate(currentMu, currentSigma, teamSize, isWinner, tau)
         currentMu = result.skill
         currentSigma = result.uncertainty
     }
