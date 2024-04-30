@@ -6,7 +6,15 @@ function getReplayId(url: string) {
         const regex = /gameId=(.+\b)/gm
         const found = regex.exec(url)
 
-        return ((found[1]));
+        if (found?.length > 0) {
+            return ((found[1]));
+
+        } else {
+            const regex2 = /replays\/([A-Za-z\d]+)$/gm
+            const found2 = regex2.exec(url)
+            return ((found2[1]));
+        }
+
     } catch {
         return null;
     }
