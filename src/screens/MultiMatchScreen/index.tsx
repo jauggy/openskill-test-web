@@ -17,14 +17,16 @@ interface CastResult {
     skill: number,
     uncertainty: number,
     numMatches: number,
-    teamSize: number
+    teamSize: number,
+    tau: number
 }
 
-function castToNumbers(skillText: string, sigmaText: string, numMatchesText: string, teamSizeText: string): CastResult {
+function castToNumbers(skillText: string, sigmaText: string, numMatchesText: string, teamSizeText: string, tauText: string): CastResult {
     const skill = parseFloat(skillText)
     const sigma = parseFloat(sigmaText)
     const numMatches = parseFloat(numMatchesText)
     const teamSize = parseFloat(teamSizeText)
+    const tau = parseFloat(tauText)
 
     if (isNaN(skill)) {
         throw 'Skill is invalid number'
@@ -38,14 +40,17 @@ function castToNumbers(skillText: string, sigmaText: string, numMatchesText: str
     if (isNaN(teamSize) || teamSize <= 0) {
         throw 'Team Size is invalid number'
     }
-
+    if (isNaN(tau)) {
+        throw 'Tau is invalid number'
+    }
 
 
     return {
         skill: skill,
         uncertainty: sigma,
         teamSize: teamSize,
-        numMatches: numMatches
+        numMatches: numMatches,
+        tau: tau
     }
 }
 
@@ -54,6 +59,7 @@ export const MultiMatchScreen = () => {
     const [uncertainty, setUncertainty] = React.useState("8.33");
     const [numMatches, setNumMatches] = React.useState("10");
     const [teamSize, setTeamSize] = React.useState("8");
+    const [tau, setTau] = useState("0")
     const [resultText, setResultText] = useState(null)
     const [weakResultText, setWeakResultText] = useState(null)
     const [strongResultText, setStrongResultText] = useState(null)
@@ -66,8 +72,15 @@ export const MultiMatchScreen = () => {
     const onSubmit = (isWinner?: boolean) => {
 
         try {
-            const castResult = castToNumbers(skill, uncertainty, numMatches, teamSize)
-            const result = osUtil.cloneAndRateMultiple(castResult.skill, castResult.uncertainty, castResult.teamSize, isWinner, castResult.numMatches)
+            const castResult = castToNumbers(skill, uncertainty, numMatches, teamSize, tau)
+            const result = osUtil.cloneAndRateMultiple(
+                castResult.skill,
+                castResult.uncertainty,
+                castResult.teamSize,
+                isWinner,
+                castResult.numMatches,
+                castResult.tau
+            )
 
             const newOs = (result.mu - result.sigma).toFixed(2)
             const newMu = result.mu.toFixed(2)
@@ -113,7 +126,6 @@ export const MultiMatchScreen = () => {
                 <View style={styles.gap} />
                 <RTextInput label='Team Size' value={teamSize} setValue={setTeamSize} />
                 <View style={styles.gap} />
-
                 <View>
                     <IconTextButton fullWidth label='Win Streak' icon={'trending-up'}
                         onPress={() => onSubmit(true)}
@@ -124,7 +136,16 @@ export const MultiMatchScreen = () => {
                     />
                 </View>
             </View>
+            <View style={styles.rowContainer}>
+                <View>
+                    <RTextInput label="Tau (Optional)" value={tau} setValue={setTau} />
+                </View>
 
+            </View>
+            <View style={styles.rowContainer}>
+                <RWeakText small>Leave this if you don't know what it means.</RWeakText>
+
+            </View>
             <Spacer />
             <View style={styles.textContainer}>
                 <View style={styles.rowContainer}>
