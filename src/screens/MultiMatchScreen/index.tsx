@@ -137,10 +137,15 @@ export const MultiMatchScreen = () => {
                 </View>
             </View>
             <View style={styles.rowContainer}>
-                <RTextInput label='Tau' value={tau} setValue={setTau} />
+                <View>
+                    <RTextInput label="Tau (Optional)" value={tau} setValue={setTau} />
+                </View>
 
             </View>
+            <View style={styles.rowContainer}>
+                <RWeakText small>Leave this if you don't know what it means.</RWeakText>
 
+            </View>
             <Spacer />
             <View style={styles.textContainer}>
                 <View style={styles.rowContainer}>
