@@ -41,7 +41,7 @@ function castToNumbers(skillText: string, sigmaText: string, numMatchesText: str
         throw 'Team Size is invalid number'
     }
     if (isNaN(tau)) {
-        throw 'Team Size is invalid number'
+        throw 'Tau is invalid number'
     }
 
 
