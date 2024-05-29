@@ -134,9 +134,14 @@ function cloneObject(obj) {
     return JSON.parse(JSON.stringify(obj))
 }
 
+function getSeason1Tau() {
+    return 1 / 3
+}
+
 export const osUtil = {
     addNewRatings: addNewRatings,
     getPredictText: getPredictText,
     cloneAndRate: cloneAndRate,
-    cloneAndRateMultiple: cloneAndRateMultiple
+    cloneAndRateMultiple: cloneAndRateMultiple,
+    getSeason1Tau: getSeason1Tau
 }

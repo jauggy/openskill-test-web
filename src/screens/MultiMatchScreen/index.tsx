@@ -59,7 +59,7 @@ export const MultiMatchScreen = () => {
     const [uncertainty, setUncertainty] = React.useState("8.33");
     const [numMatches, setNumMatches] = React.useState("10");
     const [teamSize, setTeamSize] = React.useState("8");
-    const [tau, setTau] = useState("0")
+    const [tau, setTau] = useState(osUtil.getSeason1Tau().toString())
     const [resultText, setResultText] = useState(null)
     const [weakResultText, setWeakResultText] = useState(null)
     const [strongResultText, setStrongResultText] = useState(null)
@@ -143,7 +143,7 @@ export const MultiMatchScreen = () => {
 
             </View>
             <View style={styles.rowContainer}>
-                <RWeakText small>Leave this if you don't know what it means.</RWeakText>
+                <RWeakText small>Tau is used starting from Season 1. Leave this if you don't know what it means.</RWeakText>
 
             </View>
             <Spacer />

@@ -2,6 +2,7 @@ import { BookmarkIcon } from 'components/BookmarkIcon';
 import { BottomMessage } from 'components/BottomMessage';
 import { TextButton } from 'components/Buttons/TextButton';
 import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFlex';
+import { RCheckBox } from 'components/RCheckBox';
 import { Spacer } from 'components/Spacer';
 import { TeamView } from 'components/TeamView';
 import { RText } from 'components/Typography/RText';
@@ -18,13 +19,13 @@ import { DummyButtons } from './DummyButtons';
 import { PredictText } from './PredictText';
 import { TeamsAsJson } from './TeamsAsJson';
 
-
-
+const PLACEHOLDER = "https://www.beyondallreason.info/replays?gameId=c101576679574ae4f7a0bc9bd9d6a975"
 
 export const HomeScreen = () => {
     const [teams, setTeams] = useState<Team[]>(null)
     const [renderTime, setRenderTime] = useState(new Date())
     const [isLoading, setIsLoading] = useState(false);
+    const [useTau, setUseTau] = useState(true)
     const dimensions = useWindowDimensions();
     const stateRef = useRef({
         apiResponse: null
@@ -53,12 +54,16 @@ export const HomeScreen = () => {
     }
 
     const onTeam1Wins = () => {
-        osUtil.addNewRatings(teams[0], teams[1])
+        const overrideOldRating = false
+        const tau = useTau ? osUtil.getSeason1Tau() : 0
+        osUtil.addNewRatings(teams[0], teams[1], overrideOldRating, tau)
         setRenderTime(new Date());
     }
 
     const onTeam2Wins = () => {
-        osUtil.addNewRatings(teams[1], teams[0])
+        const overrideOldRating = false
+        const tau = useTau ? osUtil.getSeason1Tau() : 0
+        osUtil.addNewRatings(teams[1], teams[0], overrideOldRating, tau)
         setRenderTime(new Date());
     }
 
@@ -91,6 +96,10 @@ export const HomeScreen = () => {
                             <TextButton label='Team 1 wins' onPress={onTeam1Wins} />
                             <View style={{ width: 20 }} />
                             <TextButton label='Team 2 wins' onPress={onTeam2Wins} />
+                            <View style={{ width: 20 }} />
+                            <RCheckBox onValueChanged={setUseTau}
+                                label={'Use Tau of 1/3 (used from Season 1)'}
+                                isChecked={useTau} />
                         </View>
                         <Spacer />
                         <TeamsAsJson teams={teams} onUpdateTeams={onUpdateTeams} />
@@ -112,7 +121,7 @@ export const HomeScreen = () => {
                 <View style={styles.paddingColumn} />
                 <View style={styles.searchContainer}>
                     <RText>Enter BAR replay URL:</RText>
-                    <SearchInput onSearch={onSearch} placeholder='https://www.beyondallreason.info/replays?gameId=2c71ca6504f9e3b5a02732d0fbdcb5bc' />
+                    <SearchInput onSearch={onSearch} placeholder={PLACEHOLDER} />
 
                     <Spacer small />
 
