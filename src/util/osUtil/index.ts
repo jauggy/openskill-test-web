@@ -1,6 +1,6 @@
 import { Player, Team } from "services/types";
 import { MuSigma, Prediction } from "./types";
-const { rate, predictWin } = require('openskill')
+const { rate, predictWin, predictDraw } = require('openskill')
 
 function toMuSigma(player: Player) {
     const result: MuSigma = {
@@ -51,10 +51,6 @@ function addNewRatings(winningTeam: Team, losingTeam: Team, overrideOldRating?: 
     }
 
     return result
-
-
-
-
 }
 
 function predict(team1: Team, team2: Team): Prediction {
@@ -67,6 +63,13 @@ function predict(team1: Team, team2: Team): Prediction {
     }
 }
 
+function getMatchQuality(team1: Team, team2: Team) {
+    const t1 = toOsTeam(team1);
+    const t2 = toOsTeam(team2);
+    console.log("MatchQuality", [t1, t2])
+    return predictDraw([t1, t2])
+}
+
 function getPredictText(team1: Team, team2: Team) {
     const prediction = predict(team1, team2)
     const team1Wins = (prediction.team1Wins * 100).toFixed(1);
@@ -75,10 +78,18 @@ function getPredictText(team1: Team, team2: Team) {
     return `OpenSkill Library win probabilities for Team 1 is ${team1Wins}% and for Team 2 is ${team2Wins}%`
 }
 
+function getMatchQualityText(team1: Team, team2: Team) {
+
+    const matchQuality = getMatchQuality(team1, team2)
+    const matchQualityText = (matchQuality * 100).toFixed(1);
+
+    return `Match quality is ${matchQualityText}%. This number will be higher if total μ of teams are close and σ (uncertainty) is low.`
+}
+
 /**
  * Clones a user into teams and re-rates them after win/loss
  */
-function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boolean, tau: number) {
+function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boolean, tau: number = 0) {
     if (teamSize <= 0) {
         throw 'Team size should be greater than 0'
     }
@@ -115,7 +126,7 @@ function cloneAndRate(mu: number, sigma: number, teamSize: number, isWinner: boo
     }
 }
 
-function cloneAndRateMultiple(mu: number, sigma: number, teamSize: number, isWinner: boolean, numMatches: number, tau: number): MuSigma {
+function cloneAndRateMultiple(mu: number, sigma: number, teamSize: number, isWinner: boolean, numMatches: number, tau: number = 0): MuSigma {
     let currentMu = mu;
     let currentSigma = sigma
     for (let i = 0; i < numMatches; i++) {
@@ -143,5 +154,7 @@ export const osUtil = {
     getPredictText: getPredictText,
     cloneAndRate: cloneAndRate,
     cloneAndRateMultiple: cloneAndRateMultiple,
-    getSeason1Tau: getSeason1Tau
+    getSeason1Tau: getSeason1Tau,
+    getMatchQualityText: getMatchQualityText,
+    getMatchQuality: getMatchQuality
 }

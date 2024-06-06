@@ -16,6 +16,7 @@ import { replayUtil } from 'src/util/replayUtil';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
 import { osUtil } from 'util/osUtil';
 import { DummyButtons } from './DummyButtons';
+import { MatchQualityText } from './MatchQualityText';
 import { PredictText } from './PredictText';
 import { TeamsAsJson } from './TeamsAsJson';
 
@@ -91,6 +92,8 @@ export const HomeScreen = () => {
                             return <TeamView data={x} index={index} key={key} />
                         })}
                         <PredictText teams={teams} />
+                        <Spacer small />
+                        <MatchQualityText teams={teams} />
                         <Spacer />
                         <View style={styles.row}>
                             <TextButton label='Team 1 wins' onPress={onTeam1Wins} />

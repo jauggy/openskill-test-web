@@ -40,7 +40,7 @@ export const TeamView = (props: Props) => {
 }
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 50,
+        marginBottom: 30,
     },
     text: {
         fontSize: fontSizes.normal,

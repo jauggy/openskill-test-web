@@ -1,3 +1,4 @@
+import { predictDraw } from "openskill";
 import { osUtil } from "util/osUtil";
 
 describe("Os Tests", () => {
@@ -22,6 +23,35 @@ describe("Os Tests", () => {
         const lossResult = osUtil.cloneAndRateMultiple(mu, sigma, 2, false, numMatches)
         expect(result.mu > mu).toBe(true)
         expect(lossResult.mu < mu).toBe(true)
+
+    });
+
+    test("Match quality", async () => {
+        const teams = [
+            [
+                {
+                    "mu": 25,
+                    "sigma": 1
+                },
+                {
+                    "mu": 25,
+                    "sigma": 1
+                }
+            ],
+            [
+                {
+                    "mu": 25,
+                    "sigma": 1
+                },
+                {
+                    "mu": 25,
+                    "sigma": 1
+                }
+            ]
+        ]
+
+        const result = predictDraw(teams)
+        console.log(result);
 
     });
 })
