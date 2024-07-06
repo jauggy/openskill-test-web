@@ -14,7 +14,7 @@ export const SigmaChange = (props: Props) => {
         const change = newSigma - props.data.uncertainty
         return (
 
-            <NumberChange>{change}</NumberChange>
+            <NumberChange weak>{change}</NumberChange>
 
         )
     }
