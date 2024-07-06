@@ -25,6 +25,9 @@ export interface Team {
 
 export interface Player {
     name: string,
+    /**
+     * This is OS + uncertainty
+     */
     skill: number,
     rank: number,
     uncertainty: number,
