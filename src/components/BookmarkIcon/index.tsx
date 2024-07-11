@@ -12,16 +12,13 @@ function getCustomLink(path: string) {
 }
 
 interface Props {
-    /**
-     * Use pathConfig
-     */
-    path: string
+    getPath: () => string
 }
 
 export const BookmarkIcon = (props: Props) => {
 
     const onPress = () => {
-        Clipboard.setString(getCustomLink(props.path));
+        Clipboard.setString(getCustomLink(props.getPath()));
 
         alertUtil.alert("Bookmark copied to clipboard")
     }
