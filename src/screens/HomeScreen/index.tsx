@@ -4,13 +4,14 @@ import { RActivityIndicatorFlex } from 'components/Loading/RActivityIndicatorFle
 import { Spacer } from 'components/Spacer';
 import { RText } from 'components/Typography/RText';
 import { pathConfig } from 'constants/pathConfig';
-import React, { useRef, useState } from 'react';
-import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Team } from 'services/types';
 import { SearchInput } from 'src/components/SearchInput';
 import { replayService } from 'src/services/replayService';
 import { replayUtil } from 'src/util/replayUtil';
 import { bottomMessageUtil } from 'util/bottomMessageUtil';
+import { urlUtil } from 'util/urlUtil';
 import { DummyButtons } from './DummyButtons';
 import { TeamTabView } from './TeamTabView';
 
@@ -21,30 +22,51 @@ export const HomeScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const dimensions = useWindowDimensions();
     const stateRef = useRef({
-        apiResponse: null
+        apiResponse: null,
+        replayId: null
     })
+
+    useEffect(() => {
+        stateRef.current.replayId = urlUtil.getReplayId()
+        setup(stateRef.current.replayId)
+    }, [])
 
 
     const setup = async (replayId: string) => {
         if (!replayId) {
             return
         }
+
         const result = await replayService.getReplay(replayId);
         stateRef.current.apiResponse = result;
 
         setTeams(result)
     }
 
+    const getBookmarkPath = () => {
+        const replayId = stateRef.current.replayId
+        if (replayId) {
+            const replayId = encodeURIComponent(stateRef.current.replayId)
+            return pathConfig.SINGLE_MATCH + `?replay=${replayId}`
+        }
+
+        return pathConfig.SINGLE_MATCH
+    }
+
     const onSearch = (search: string) => {
-        setIsLoading(true);
         const replayId = replayUtil.getReplayId(search);
-        setIsLoading(false);
+        onSearchReplayId(replayId)
+    }
+
+    const onSearchReplayId = (replayId: string) => {
         if (!replayId) {
             bottomMessageUtil.error("Invalid Replay url");
             return;
         }
+        stateRef.current.replayId = replayId
         setup(replayId)
     }
+
     const onUpdateTeams = (json: string) => {
         try {
             const o = JSON.parse(json);
@@ -84,8 +106,6 @@ export const HomeScreen = () => {
                     <SearchInput onSearch={onSearch} placeholder={PLACEHOLDER} />
 
                     <Spacer small />
-
-
                     <Spacer />
 
                     {renderContent()}
@@ -101,11 +121,8 @@ export const HomeScreen = () => {
 
             </ScrollView>
 
-
-
-
             <BottomMessage />
-            <BookmarkIcon path={pathConfig.SINGLE_MATCH} />
+            <BookmarkIcon getPath={getBookmarkPath} />
         </View>
     );
 }
