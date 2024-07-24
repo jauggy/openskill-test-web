@@ -21,7 +21,7 @@ const screenOptions: MaterialTopTabNavigationOptions = {
     tabBarContentContainerStyle: {
         backgroundColor: 'white'
     },
-
+    swipeEnabled: false
 
 }
 
