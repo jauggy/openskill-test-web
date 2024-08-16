@@ -2398,12 +2398,12 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.11.tgz#2596fb352ee96a1379c657734d4b913a613ad563"
   integrity sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==
 
-"@types/ramda@0.30.0":
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.30.0.tgz#59ae27c3bf00036e35b6944dd7f6d283f869f908"
-  integrity sha512-DQtfqUbSB18iM9NHbQ++kVUDuBWHMr6T2FpW1XTiksYRGjq4WnNPZLt712OEHEBJs7aMyJ68Mf2kGMOP1srVVw==
+"@types/ramda@0.30.1":
+  version "0.30.1"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.30.1.tgz#316257fec12747bb39a2e921df48a9dcb8c164a9"
+  integrity sha512-aoyF/ADPL6N+/NXXfhPWF+Qj6w1Cql59m9wX0Gi15uyF+bpzXeLd63HPdiTDE2bmLXfNcVufsDPKmbfOrOzTBA==
   dependencies:
-    types-ramda "^0.30.0"
+    types-ramda "^0.30.1"
 
 "@types/react@~18.2.45":
   version "18.2.57"
@@ -6064,16 +6064,16 @@ open@^8.0.4, open@^8.3.0:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
-openskill@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/openskill/-/openskill-4.0.1.tgz#9a01d80b1cf94116b73e694a35bb75bf719ea7dc"
-  integrity sha512-sJzJpXIge17CNF3FSe84eVsRW6ilqIAYtCMCprA0Yx/0bcx30gjeCvZhwB55JOt2ETpwCcGhPt9uGIffcM/spA==
+openskill@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/openskill/-/openskill-4.0.3.tgz#c8fad9369de8489d2b293fc5000448148a25cb26"
+  integrity sha512-3xTWNvCXG78CDqDtAm16n5OaSeGjjx8uWdCimfkaZrC4jDmHNUtJ9x3toiqJ7FAC2O06leeVXg7OI8HvnNaRow==
   dependencies:
     "@types/gaussian" "1.2.2"
-    "@types/ramda" "0.30.0"
+    "@types/ramda" "0.30.1"
     gaussian "1.3.0"
     ramda "0.30.1"
-    sort-unwind "2.1.2"
+    sort-unwind "3.1.0"
 
 ora@3.4.0, ora@^3.4.0:
   version "3.4.0"
@@ -7097,10 +7097,10 @@ slugify@^1.3.4, slugify@^1.6.6:
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.6.6.tgz#2d4ac0eacb47add6af9e04d3be79319cbcc7924b"
   integrity sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==
 
-sort-unwind@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/sort-unwind/-/sort-unwind-2.1.2.tgz#64206c4061f6775afd500fd590fbbda30b1fe3c8"
-  integrity sha512-k9QdYgq53oDXiteKqc58OK/8zpXmaMViN32vKZ0sCQQvczVErXXFWmpDB/+3cWD/Yc04+S7e2KX3Hdf6/l3iQA==
+sort-unwind@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/sort-unwind/-/sort-unwind-3.1.0.tgz#0ce0e1796ee9d39f5a19f25330957ec971ff9b89"
+  integrity sha512-9NJPZtqwIHNXBqY3SWZrwd/VU+lFo2i1Q79cuaRpMMkZFuf+Y54XVAADyy/w6r8t409KkNwo6cKaEKM56XaSNQ==
 
 source-map-js@^1.0.2:
   version "1.0.2"
@@ -7611,7 +7611,7 @@ type-fest@^3.0.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-3.13.1.tgz#bb744c1f0678bea7543a2d1ec24e83e68e8c8706"
   integrity sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==
 
-types-ramda@^0.30.0:
+types-ramda@^0.30.1:
   version "0.30.1"
   resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.30.1.tgz#03d255128e3696aeaac76281ca19949e01dddc78"
   integrity sha512-1HTsf5/QVRmLzcGfldPFvkVsAdi1db1BBKzi7iW3KBUlOICg/nKnFS+jGqDJS3YD8VsWbAh7JiHeBvbsw8RPxA==
