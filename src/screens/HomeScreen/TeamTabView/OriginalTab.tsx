@@ -7,7 +7,6 @@ import { StyleSheet, View } from 'react-native';
 import { Team } from 'services/types';
 import { osUtil } from 'util/osUtil';
 import { PredictText } from '../PredictText';
-import { AlgoDescriptionText } from './AlgoDescriptionText';
 
 interface Props {
     teams: Team[],
@@ -40,7 +39,6 @@ export const OriginalTab = (props: Props) => {
                 const key = `${index}:${renderTime.toString()}`
                 return <TeamView data={x} index={index} key={key} />
             })}
-            <AlgoDescriptionText algo={null} />
             <PredictText teams={teams} />
             <Spacer />
             <View style={styles.row}>
