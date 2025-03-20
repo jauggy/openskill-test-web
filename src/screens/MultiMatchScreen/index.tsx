@@ -1,6 +1,7 @@
 import { BookmarkIcon } from 'components/BookmarkIcon';
 import { IconTextButton } from 'components/Buttons/IconTextButton';
 import { RLink } from 'components/Buttons/RLink';
+import { DirectionIcon } from 'components/DirectionIcon';
 import { RTextInput } from 'components/RTextInput';
 import { Spacer } from 'components/Spacer';
 import { RText } from 'components/Typography/RText';
@@ -63,6 +64,7 @@ export const MultiMatchScreen = () => {
     const [resultText, setResultText] = useState(null)
     const [weakResultText, setWeakResultText] = useState(null)
     const [strongResultText, setStrongResultText] = useState(null)
+    const [ratingChange, setRatingChange] = useState(null)
 
     const onLinkAccount = () => {
         window.open(url, '_blank').focus();
@@ -81,8 +83,9 @@ export const MultiMatchScreen = () => {
                 castResult.numMatches,
                 castResult.tau
             )
-
+            const oldOs = castResult.skill - castResult.uncertainty
             const newOs = (result.mu - result.sigma).toFixed(2)
+            const ratingChange = (result.mu - result.sigma - oldOs)
             const newMu = result.mu.toFixed(2)
             const newSigma = result.sigma.toFixed(2)
             const winText = isWinner ? "winning" : "losing"
@@ -92,6 +95,7 @@ export const MultiMatchScreen = () => {
             setResultText(text)
             setWeakResultText(weakText)
             setStrongResultText(strongText)
+            setRatingChange(ratingChange)
 
         } catch (e) {
             bottomMessageUtil.error(e)
@@ -151,6 +155,8 @@ export const MultiMatchScreen = () => {
                 <View style={styles.rowContainer}>
                     <RText>{resultText}</RText>
                     <RText bold>{strongResultText}</RText>
+                    <DirectionIcon ratingChange={ratingChange} />
+
                     <RWeakText>{weakResultText}</RWeakText>
 
                 </View>
